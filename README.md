@@ -1,6 +1,8 @@
-# kompose-tests
-Functional tests for Kompose
+# Functional tests for Kompose
 
-Pre-requisites
+Running tests on kompose with Openshift Origin
 
-# Make sure the docker and oc binaries are installed
+
+## Pre-requisites
+* Make sure the docker and oc cluster up are installed
+* Installation docs  for oc cluster here: https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md
