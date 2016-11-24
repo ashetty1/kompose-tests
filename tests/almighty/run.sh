@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Test case for almighty
 
 LOG_FILE=$1
@@ -10,7 +8,7 @@ kompose --provider=openshift -f tests/almighty/docker-compose.yml up &>> $LOG_FI
 
 if [ $result -ne 0 ]; then
     create_log "Kompose command failed"
-    exit;
+    exit 1;
 fi
 
 create_log "[ALMIGHTY] Waiting for the pods to come up"
@@ -31,5 +29,15 @@ create_log "[ALMIGHTY] svc/core exposed"
 create_log "[ALMIGHTY] URL to access core: ${route_url}"
 
 
-# TODO: Check if the db and web are talking to each other
+# Check if the db and web are talking to each other
+# Sleep to add some delay before probing
+sleep 50;
+almighty_status=`curl -I http://${route_url}/api/status  2>/dev/null | head -n 1 | cut -d$' ' -f2`
 
+if [ $almighty_status != 200 ]; then
+    echo $almighty_status
+    create_log "[ALMIGHTY] DB and Core not talking"
+    exit 1;
+else
+    create_log "[ALMIGHTY] Status works"
+fi
