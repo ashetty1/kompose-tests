@@ -1,3 +1,4 @@
+
 # Unsupported Kompose labels
 # https://github.com/kubernetes-incubator/kompose/blob/master/docs/user-guide.md#unsupported-docker-compose-configuration-options
 KOMPOSE_UNSUPPORTED="build cgroup_parent devices depends_on dns dns_search domainname env_file extends external_links extra_hosts hostname ipc logging mac_address mem_limit memswap_limit network_mode networks pid security_opt shm_size stop_signal volume_driver uts read_only stdin_open tty user ulimits dockerfile net"
@@ -37,4 +38,9 @@ create_pv() {
     if [ $pv_status == 'Available' ]; then
 	return 0
     fi
+}
+
+os_cleanup() {
+    # routes
+    oc delete dc,svc,is,pvc,pods,routes --all
 }

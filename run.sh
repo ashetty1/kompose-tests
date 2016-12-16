@@ -1,17 +1,12 @@
 #!/bin/bash
 
-LOG_FILE="/tmp/komposetest.`date '+%Y%m%d'`"
-source lib.sh
-
-
-os_cleanup() {
-    oc delete dc,svc,is,pv,pvc,pods,routes --all
-}
+source ./config.sh
+source ./lib.sh
 
 ######
 
 starttime=`date "+%Y-%m-%d %H:%M:%S"`
-create_log "STARTING TESTS ${starttime}"
+create_log "STARTING TESTS ${starttime}" 
 testcases_dir='tests/*'
 
 # make sure flush iptables on host
@@ -35,7 +30,7 @@ for test_case in $testcases_dir ; do
     timeout 30m $test_case/run.sh $LOG_FILE; result=$?
 
     if [ $result -ne 0 ] ; then
-	create_log "FAILED $test_case"
+        create_log "FAILED $test_case"
 	results=1
 	exit;
     else
