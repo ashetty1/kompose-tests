@@ -28,8 +28,8 @@ create_pv() {
 
     cp ./create_pv.yaml /tmp/create_pv_tmp.yaml
     # Using < as the delimiter
-    sed -i 's<path: /data<path: ${nfs_path}<g' /tmp/create_pv_tmp.yaml
-    sed -i 's<path: /data<path: ${nfs_path}<g' /tmp/create_pv_tmp.yaml
+    sed -i 's<path: /data<path: '${nfs_path}'<g' /tmp/create_pv_tmp.yaml
+    sed -i 's<server: 127.0.0.1<server: '${nfs_server}'<g' /tmp/create_pv_tmp.yaml
 
     oc create -f /tmp/create_pv_tmp.yaml
     sleep 5;
