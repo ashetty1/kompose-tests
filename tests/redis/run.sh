@@ -32,7 +32,7 @@ fi
 
 sleep 200;
 
-if [ $(oc get pods | wc -l ) -eq 0 ] ; then
+if [ $(oc get pods | wc -l ) == 0 ] ; then
     create_log "[KOMPOSE] All pods are down"
     exit 1;
 fi
