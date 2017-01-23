@@ -1,0 +1,19 @@
+- job-template:
+    name: '{name}-{provider}'
+    description: 'Functional tests on kompose'
+    # triggers:
+    #  - timed: '@daily'
+    project-type: freestyle
+    block-downstream: false
+    builders:
+        - shell: | 
+            echo "Hello"
+            python /opt/cico_kompose/ci/cccp_ci.py
+
+
+- project:
+   name: kompose-ci
+   provider: openshift
+   jobs:
+     - '{name}-{provider}'
+
