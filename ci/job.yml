@@ -8,7 +8,7 @@
     builders:
         - shell: | 
             echo "Hello"
-            python /opt/cico_kompose/ci/cccp_ci.py
+            python ci/cccp_ci.py
 
 
 - project:
