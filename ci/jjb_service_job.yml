@@ -1,0 +1,23 @@
+- job:
+    name: centos-kompose-tests
+    description: |
+        Managed by Jenkins Job Builder, do not edit manually!
+    node: container
+    properties:
+        - github:
+            url: https://github.com/ashetty1/kompose-tests
+    triggers:
+        - github
+
+    wrappers:
+        - ansicolor
+    scm:
+        - git:
+            url: https://github.com/ashetty1/kompose-tests
+            skip-tag: True
+            branches:
+                - master
+    builders:
+        - shell: |
+            jenkins-jobs --ignore-cache --conf ~/jenkins_jobs.ini update ci/job.yml
+
