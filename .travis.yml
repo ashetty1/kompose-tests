@@ -1,5 +1,8 @@
 sudo: required
 
+env:
+  - GOPATH=/usr
+
 before_script:
   # openshift
   - sudo apt-get install wget golang -y
