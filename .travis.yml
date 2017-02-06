@@ -13,11 +13,11 @@ matrix:
 
 before_install:
   # openshift
-  - sudo apt-get wget -y
+  - sudo apt-get install wget golang -y
   - wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-linux-64bit.tar.gz -O /tmp/oc.tar.gz
   - mkdir /tmp/ocdir && cd /tmp/ocdir && tar -xvvf /tmp/oc.tar.gz
   - sudo mv /tmp/ocdir/*/oc /usr/bin/
-  # - export GOPATH=/usr && go get github.com/kubernetes-incubator/kompose
+  - export GOPATH=/usr && go get github.com/kubernetes-incubator/kompose
   
 # install:
 #   - sudo make install
