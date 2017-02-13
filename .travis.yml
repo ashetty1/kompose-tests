@@ -20,4 +20,4 @@ install:
 
 script:
   # run tests
-  - cd ashetty1/kompose-tests && sh run.sh
+  - cd $HOME/gopath/src/github.com/ashetty1/kompose-tests && sh run.sh
