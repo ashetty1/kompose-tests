@@ -10,9 +10,9 @@ env:
 before_install:
   # openshift
   - sudo apt-get install wget golang docker -y
-  - sed -i "s:.*INSECURE_REGISTRY='--insecure-registry':INSECURE_REGISTRY='--insecure-registry 172.30.0.0/16':g" /etc/sysconfig/docker
-  - cat /etc/sysconfig/docker
-  - systemctl restart docker
+  - sudo sed -i "s:.*INSECURE_REGISTRY='--insecure-registry':INSECURE_REGISTRY='--insecure-registry 172.30.0.0/16':g" /etc/sysconfig/docker
+  - sudo cat /etc/sysconfig/docker
+  - sudo systemctl restart docker
   - wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-linux-64bit.tar.gz -O /tmp/oc.tar.gz
   - mkdir /tmp/ocdir && cd /tmp/ocdir && tar -xvvf /tmp/oc.tar.gz
   - sudo mv /tmp/ocdir/*/oc /usr/bin/
