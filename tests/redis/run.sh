@@ -18,7 +18,7 @@ sleep 200;
 
 if [ $(oc get pods | grep redis | awk '{ print $3 }') == 'Running'  ] &&
        [ $(oc get pods | grep web | awk '{ print $3 }') == 'Running'  ] ; then
-    create_log "[KOMPOSE] All Almighty pods are Running"
+    create_log "[KOMPOSE] All pods are Running"
     oc get pods >> $LOG_FILE
 fi
 

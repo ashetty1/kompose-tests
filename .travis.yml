@@ -34,5 +34,5 @@ script:
   - docker version
   - oc version
   - kompose version
-  #- oc cluster up
-  - ./run.sh
+  # - oc cluster up
+  - cd $HOME/gopath/src/github.com/ashetty1/kompose-tests && ./run.sh
