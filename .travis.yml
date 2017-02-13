@@ -17,7 +17,7 @@ before_install:
   #- sudo sed -i "s:.*INSECURE_REGISTRY='--insecure-registry':INSECURE_REGISTRY='--insecure-registry 172.30.0.0/16':g" /etc/sysconfig/docker
   #- sudo cat /etc/sysconfig/docker
   #- sudo systemctl restart docker
-  - sudo sed -i "s:.*INSECURE_REGISTRY='--insecure-registry':INSECURE_REGISTRY='--insecure-registry 172.30.0.0/16':g" /etc/default/docker
+  - sudo sed -i 's:DOCKER_OPTS=":DOCKER_OPTS="--insecure-registry 172.30.0.0/16 :g' /etc/default/docker
   - sudo cat /etc/default/docker
   - sudo /etc/init.d/docker restart
   - wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-linux-64bit.tar.gz -O /tmp/oc.tar.gz
