@@ -10,6 +10,7 @@ env:
 before_install:
   # openshift
   - sudo apt-get install wget golang docker -y
+  - systemctl show docker | grep EnvironmentFile
   - sudo sed -i "s:.*INSECURE_REGISTRY='--insecure-registry':INSECURE_REGISTRY='--insecure-registry 172.30.0.0/16':g" /etc/sysconfig/docker
   - sudo cat /etc/sysconfig/docker
   - sudo systemctl restart docker
