@@ -1,3 +1,4 @@
+#!/bin/bash
 # Test case for kompose up/down
 
 LOG_FILE=$1

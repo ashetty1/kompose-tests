@@ -13,10 +13,6 @@ env:
 before_install:
   # openshift
   - sudo apt-get install wget golang -y
-  #- systemctl show docker | grep EnvironmentFile
-  #- sudo sed -i "s:.*INSECURE_REGISTRY='--insecure-registry':INSECURE_REGISTRY='--insecure-registry 172.30.0.0/16':g" /etc/sysconfig/docker
-  #- sudo cat /etc/sysconfig/docker
-  #- sudo systemctl restart docker
   - sudo sed -i 's:DOCKER_OPTS=":DOCKER_OPTS="--insecure-registry 172.30.0.0/16 :g' /etc/default/docker
   - sudo mv /bin/findmnt /bin/findmnt.backup
   - sudo cat /etc/default/docker
@@ -34,5 +30,4 @@ script:
   - docker version
   - oc version
   - kompose version
-  # - oc cluster up
   - cd $HOME/gopath/src/github.com/ashetty1/kompose-tests && ./run.sh
