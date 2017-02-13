@@ -4,20 +4,23 @@ language:
   - go
   - bash
 
+services:
+  - docker
+
 env:
   - GOPATH=/usr
 
 before_install:
   # openshift
-  - sudo apt-get install wget golang docker -y
-  - systemctl show docker | grep EnvironmentFile
-  - sudo sed -i "s:.*INSECURE_REGISTRY='--insecure-registry':INSECURE_REGISTRY='--insecure-registry 172.30.0.0/16':g" /etc/sysconfig/docker
-  - sudo cat /etc/sysconfig/docker
-  - sudo systemctl restart docker
-  - wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-linux-64bit.tar.gz -O /tmp/oc.tar.gz
-  - mkdir /tmp/ocdir && cd /tmp/ocdir && tar -xvvf /tmp/oc.tar.gz
-  - sudo mv /tmp/ocdir/*/oc /usr/bin/
-  - oc --help
+  - sudo apt-get install wget golang -y
+  #- systemctl show docker | grep EnvironmentFile
+  #- sudo sed -i "s:.*INSECURE_REGISTRY='--insecure-registry':INSECURE_REGISTRY='--insecure-registry 172.30.0.0/16':g" /etc/sysconfig/docker
+  #- sudo cat /etc/sysconfig/docker
+  #- sudo systemctl restart docker
+  #- wget https://github.com/openshift/origin/releases/download/v1.4.1/openshift-origin-client-tools-v1.4.1-3f9807a-linux-64bit.tar.gz -O /tmp/oc.tar.gz
+  #- mkdir /tmp/ocdir && cd /tmp/ocdir && tar -xvvf /tmp/oc.tar.gz
+  #- sudo mv /tmp/ocdir/*/oc /usr/bin/
+  #- oc --help
   # - sudo go get github.com/kubernetes-incubator/kompose
 
 install:
@@ -25,4 +28,5 @@ install:
 
 script:
   # run tests
-  - cd $HOME/gopath/src/github.com/ashetty1/kompose-tests && ./run.sh
+  - docker version
+  # - cd $HOME/gopath/src/github.com/ashetty1/kompose-tests && ./run.sh
