@@ -1,8 +1,6 @@
-# Kompose tests
+# Functional tests for Kompose
 [![Build Status](https://travis-ci.org/ashetty1/kompose-tests.svg?branch=master)](https://travis-ci.org/ashetty1/kompose-tests/)
 
-
-# Functional tests for Kompose
 
 Running tests on kompose with Openshift Origin
 
