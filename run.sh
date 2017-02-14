@@ -13,12 +13,13 @@ testcases_dir='tests/*'
 #sudo iptables -F
 
 create_log "Starting oc cluster"
-oc cluster up >> $LOG_FILE; result=$?
-if [ $result -ne 0 ]; then
-    create_log "FAILED: Please check if the 'oc cluster' has been installed."
-    exit;
-fi
+# oc cluster up >> $LOG_FILE; result=$?
+# if [ $result -ne 0 ]; then
+#     create_log "FAILED: Please check if the 'oc cluster' has been installed."
+#     exit;
+# fi
 
+oc cluster up;
 
 if [ $result -ne 0 ]; then
     create_log "FAILED 'oc cluster up'"

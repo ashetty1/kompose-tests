@@ -1,3 +1,4 @@
+#!/bin/bash
 # Test case for almighty
 
 LOG_FILE=$1
