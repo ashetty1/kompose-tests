@@ -7,7 +7,7 @@ source ./lib.sh
 create_log "[KOMPOSE] Running etherpad compose file: tests/etherpad/docker-compose.yml"
 
 export $(cat tests/etherpad/envs)
-kompose --provider=openshift -f tests/redis/docker-compose.yml up &>> $LOG_FILE; result=$?;
+kompose --provider=openshift -f tests/etherpad/docker-compose.yml up &>> $LOG_FILE; result=$?;
 
 if [ $result -ne 0 ]; then
     create_log "Kompose command failed"
