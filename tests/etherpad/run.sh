@@ -26,11 +26,12 @@ sleep 5;
 
 if [ "$(oc get pods | grep etherpad | awk '{ print $3 }')" == 'Running'  ] &&
        [ "$(oc get pods | grep mariadb | awk '{ print $3 }')" == 'Running'  ] ; then
-    create_log "[KOMPOSE] All pods are Running now"
+    create_log "[KOMPOSE] All pods are Running now. `kompose up` is successful."
     oc get pods >> $LOG_FILE
 fi
 
 # Kompose down
+create_log "[KOMPOSE] Running `kompose down`"
 
 kompose --provider=openshift -f tests/etherpad/docker-compose.yml down &>> $LOG_FILE; result=$?;
 
@@ -47,6 +48,6 @@ while [ $(oc get pods | wc -l ) != 0 ] ; do
 done
 
 if [ $(oc get pods | wc -l ) == 0 ] ; then
-    create_log "[KOMPOSE] All pods are down now"
+    create_log "[KOMPOSE] All pods are down now. `kompose down` successful."
     exit 0;
 fi
