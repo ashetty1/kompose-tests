@@ -20,15 +20,15 @@ create_log "Waiting for the pods to come up"
 # sleep 200;
 
 
-while [ $(oc get pods | grep etherpad | awk '{ print $3 }') != 'Running'  ] &&
-	  [ $(oc get pods | grep mariadb | awk '{ print $3 }') != 'Running'  ] ; do
+while [ "$(oc get pods | grep etherpad | awk '{ print $3 }')" != 'Running'  ] &&
+	  [ "$(oc get pods | grep mariadb | awk '{ print $3 }')" != 'Running'  ] ; do
     create_log "Waiting for the pods to come up ..."
-    sleep 50;
+    sleep 30;
 done
 
-if [ $(oc get pods | grep etherpad | awk '{ print $3 }') == 'Running'  ] &&
-       [ $(oc get pods | grep mariadb | awk '{ print $3 }') == 'Running'  ] ; then
-    create_log "[KOMPOSE] All pods are Running"
+if [ "$(oc get pods | grep etherpad | awk '{ print $3 }')" == 'Running'  ] &&
+       [ "$(oc get pods | grep mariadb | awk '{ print $3 }')" == 'Running'  ] ; then
+    create_log "[KOMPOSE] All pods are Running now"
     oc get pods >> $LOG_FILE
 fi
 
