@@ -30,9 +30,9 @@ fi
 
 
 if [ $run_specific_tests == '' ]; then
-    tests_to_run=$run_specific_tests
-else
     tests_to_run=$testcases_dir
+else
+    tests_to_run=$run_specific_tests
 fi
 
 
