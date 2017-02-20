@@ -14,11 +14,7 @@ if [ $result -ne 0 ]; then
     exit 1;
 fi
 
-create_log "Waiting for the pods to come up"
-
-# TODO: fix this
 # sleep 200;
-
 
 while [ "$(oc get pods | grep etherpad | awk '{ print $3 }')" != 'Running'  ] &&
 	  [ "$(oc get pods | grep mariadb | awk '{ print $3 }')" != 'Running'  ] ; do
@@ -26,17 +22,13 @@ while [ "$(oc get pods | grep etherpad | awk '{ print $3 }')" != 'Running'  ] &&
     sleep 30;
 done
 
+sleep 5;
+
 if [ "$(oc get pods | grep etherpad | awk '{ print $3 }')" == 'Running'  ] &&
        [ "$(oc get pods | grep mariadb | awk '{ print $3 }')" == 'Running'  ] ; then
     create_log "[KOMPOSE] All pods are Running now"
     oc get pods >> $LOG_FILE
 fi
-
-# while [ $(oc get pods | grep etherpad | awk '{ print $3 }') != 'Running'  ] && 
-# 	  [ $(oc get pods | grep mariadb | awk '{ print $3 }') != 'Running'  ] ; do
-#     create_log "Waiting for the pods to come up ..."
-#     sleep 50
-# done
 
 # Kompose down
 
@@ -55,6 +47,6 @@ while [ $(oc get pods | wc -l ) != 0 ] ; do
 done
 
 if [ $(oc get pods | wc -l ) == 0 ] ; then
-    create_log "[KOMPOSE] All pods are down"
+    create_log "[KOMPOSE] All pods are down now"
     exit 0;
 fi
