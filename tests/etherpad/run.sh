@@ -17,7 +17,14 @@ fi
 create_log "Waiting for the pods to come up"
 
 # TODO: fix this
-sleep 200;
+# sleep 200;
+
+
+while [ $(oc get pods | grep etherpad | awk '{ print $3 }') != 'Running'  ] &&
+	  [ $(oc get pods | grep mariadb | awk '{ print $3 }') != 'Running'  ] ; do
+    create_log "Waiting for the pods to come up ..."
+    sleep 50;
+done
 
 if [ $(oc get pods | grep etherpad | awk '{ print $3 }') == 'Running'  ] &&
        [ $(oc get pods | grep mariadb | awk '{ print $3 }') == 'Running'  ] ; then
@@ -25,7 +32,14 @@ if [ $(oc get pods | grep etherpad | awk '{ print $3 }') == 'Running'  ] &&
     oc get pods >> $LOG_FILE
 fi
 
+# while [ $(oc get pods | grep etherpad | awk '{ print $3 }') != 'Running'  ] && 
+# 	  [ $(oc get pods | grep mariadb | awk '{ print $3 }') != 'Running'  ] ; do
+#     create_log "Waiting for the pods to come up ..."
+#     sleep 50
+# done
+
 # Kompose down
+
 kompose --provider=openshift -f tests/etherpad/docker-compose.yml down &>> $LOG_FILE; result=$?;
 
 if [ $result -ne 0 ]; then
