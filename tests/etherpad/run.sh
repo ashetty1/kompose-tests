@@ -51,6 +51,7 @@ fi
 
 while [ $(oc get pods | wc -l ) != 0 ] ; do
     create_log "Waiting for the pods to be deleted ..."
+    sleep 30;
 done
 
 if [ $(oc get pods | wc -l ) == 0 ] ; then
