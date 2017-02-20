@@ -8,6 +8,7 @@ source ./lib.sh
 starttime=`date "+%Y-%m-%d %H:%M:%S"`
 create_log "STARTING TESTS ${starttime}" 
 testcases_dir='tests/*'
+run_specific_tests='tests/etherpad'
 
 # make sure flush iptables on host
 #sudo iptables -F
@@ -27,7 +28,15 @@ if [ $result -ne 0 ]; then
     exit;
 fi
 
-for test_case in $testcases_dir ; do
+
+if [ $run_specific_tests -ne 0 ]; then
+    tests_to_run=$run_specific_tests
+else
+    tests_to_run=$testcases_dir
+fi
+
+
+for test_case in $tests_to_run ; do
     timeout 30m $test_case/run.sh $LOG_FILE; result=$?
 
     if [ $result -ne 0 ] ; then
