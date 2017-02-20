@@ -47,7 +47,11 @@ if [ $result -ne 0 ]; then
     exit 1;
 fi
 
-sleep 200;
+#sleep 200;
+
+while [ $(oc get pods | wc -l ) != 0 ] ; do
+    create_log "Waiting for the pods to be deleted ..."
+done
 
 if [ $(oc get pods | wc -l ) == 0 ] ; then
     create_log "[KOMPOSE] All pods are down"
