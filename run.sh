@@ -20,7 +20,7 @@ create_log "Starting oc cluster"
 #     exit;
 # fi
 
-oc cluster up;
+oc cluster up; result=$?;
 
 if [ $result -ne 0 ]; then
     create_log "FAILED 'oc cluster up'"
