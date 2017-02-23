@@ -8,7 +8,7 @@ source ./lib.sh
 starttime=`date "+%Y-%m-%d %H:%M:%S"`
 create_log "STARTING TESTS ${starttime}" 
 testcases_dir='tests/*'
-run_specific_tests='tests/etherpad'
+run_specific_tests=''
 
 # make sure flush iptables on host
 #sudo iptables -F
