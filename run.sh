@@ -8,7 +8,7 @@ source ./lib.sh
 starttime=`date "+%Y-%m-%d %H:%M:%S"`
 create_log "STARTING TESTS ${starttime}" 
 testcases_dir='tests/*'
-run_specific_tests='tests/etherpad'
+run_specific_tests=''
 
 # make sure flush iptables on host
 #sudo iptables -F
@@ -20,7 +20,7 @@ create_log "Starting oc cluster"
 #     exit;
 # fi
 
-oc cluster up;
+oc cluster up; result=$?;
 
 if [ $result -ne 0 ]; then
     create_log "FAILED 'oc cluster up'"
